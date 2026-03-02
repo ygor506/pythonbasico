@@ -1,125 +1,67 @@
 import random
 
+# Cores no Terminal PY
+VERMELHO = "\033[31m"
+VERDE = "\033[32m"
+AMARELO = "\033[33m"
+AZUL = "\033[34m"
+RESET = "\033[0m"
 
+print(f"{AZUL}**************************{RESET}")
+print(f"{AZUL}*****Jogo adivinhação*****{RESET}")
+print(f"{AZUL}**************************{RESET}")
 
-#cores no terminal PY
-vermelho = "/033[31m]"
-verde = "/033[32m]"
-amarelo ="/033[33m]"
-azul ="/033[34m]"
-RESET = "/033[35m]"
+numero_secreto = random.randrange(1, 101)
+total_tentativas = 0
 
-def escolher_nivel():
-   print("/nEscolha o nivel: ")
-   print("1 -- facil (10 tentativas)")
-   print("2 -- medio (5 tentativas)")
-   print("3 -- dificil (3 tentativas)")
+print("Qual dificuldade você gostaria de jogar? ")
+print("(1) Fácil (2) Médio (3) Difícil ")
 
-   while True:
-      nivel_str = input("Digite apenas números (1, 2, 3): ")
-      if not nivel_str.isdigit():
-         print(vermelho+"Digite apenas Números! "+ RESET)
-         continue
-      nivel_str = int(nivel_str)
-      if nivel == 1:
-         return 10
-      elif nivel == 2:
-         return 5
-      elif nivel == 3:
-         return 3
-      else:
-         print(amarelo+"escolha apenas 1, 2 ou 3"+RESET)
+while True:
+    try:
+        dificuldade = int(input("Defina a dificuldade (1-2-3): "))
 
+        if dificuldade == 1:
+            total_tentativas = 10
+            break
+        elif dificuldade == 2:
+            total_tentativas = 5
+            break
+        elif dificuldade == 3:
+            total_tentativas = 3
+            break
+        else:
+            print(f"{AMARELO}Opção inválida! Digite 1, 2 ou 3.{RESET}")
+    except ValueError:
+        print(f"{VERMELHO}Por favor, digite um número inteiro.{RESET}")
 
-def jogar():
-   
-   print(azul+'*********************************'+RESET)
-print(azul+'*********Jogo adivinhação********'+RESET)
-print(azul+'*********************************'+RESET)
+print(f"Você terá {total_tentativas} tentativas.")
+print("Suas tentativas: ", total_tentativas)
 
-
-total_tentativas = escolher_nivel()
-numero_secreto = random.randrange(1,31)
-pontos = 100
-historico = []
-
-
+# Loop do jogo
 for rodada in range(1, total_tentativas + 1):
-  print("tentativa {rodada} de {total_tentativas}".format(rodada,total_tentativas))
-  chute_str = input("Digite um número 1 entre 100: "+RESET)
- 
-  chute = int(chute_str)
+    print("Tentativa {} de {}".format(rodada, total_tentativas))
 
-  print("Seu numero é" == chute_str)
-  
+    chute_str = input("Digite o seu numero: ")
+    chute = int(chute_str)
 
-  if(chute < 1 or chute > 30):
-     print("Você deve digitar um numero entre 1 e 30! ") 
-     continue
-  
+    if(chute < 1 or chute > 100):
+        print("O número deve ser entre 1 e 100")
+        continue
 
-  acertou = chute == numero_secreto
-  maior = chute > numero_secreto
-  menor = chute < numero_secreto
+    acertou = chute == numero_secreto
+    maior = chute > numero_secreto
+    menor = chute < numero_secreto
 
-  if(acertou):
-    print("Você Acertou!! ")
-    break
-  else:
-for rodada in range(1, total_tentativas + 1):
-  print("tentativa {} de {}".format(rodada,total_tentativas))
+    if(acertou):
+        print("É isso meno você é foda! ")
+        break
+    else:
+        if(maior):
+            print("Diminuii")
+        elif(menor):
+            print("Aumenta o bagulho")
+        # rodada = rodada + 1  <- No 'for' do Python, isso não é necessário, mas mantive a lógica
 
-  chute_str = input("Digite o seu número: ")
-  print("Seu numero é" == chute_str)
-  chute = int(chute_str)
-
-  if(chute < 1 or chute > 30):
-     print("Você deve digitar um numero entre 1 e 30! ") 
-     continue
-  
-
-  acertou = chute == numero_secreto
-  maior = chute > numero_secreto
-  menor = chute < numero_secreto
-
-  if(acertou):
-    print("Você Acertou!! ")
-    break
-  else:
-    if(maior):
-        print("O seu chute foi maior que o numero secreto")
-    elif(menor):
-        print("O seu chute foi menor que o numero secreto")
-    if(maior):
-        print("O seu chute foi maior que o numero secreto")
-    elif(menor):
-        print("O seu chute foi menor que o numero secreto")
-   
-   
-
-
-
-
-
-
-
-
-
-
-
-print('*********************************')
-print('*********Jogo adivinhação********')
-print('*********************************')
- 
-numero_secreto = random.randrange(1,46)
-total_tentativas = 5
-rodada = 1
-
-dificuldade_facil = 1
-dificuldade_media = 2
-dificuldade_dificil = 3
-
-print("dificuldade escolhida", escolha)
-
-
-print("Fim de jogo!")
+print(f"O número era: {numero_secreto}")
+print("Boa meno tenta de novo se tu é bem home")
