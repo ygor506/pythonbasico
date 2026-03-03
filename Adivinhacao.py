@@ -36,32 +36,37 @@ while True:
         print(f"{VERMELHO}Por favor, digite um número inteiro.{RESET}")
 
 print(f"Você terá {total_tentativas} tentativas.")
-print("Suas tentativas: ", total_tentativas)
 
-# Loop do jogo
+
 for rodada in range(1, total_tentativas + 1):
-    print("Tentativa {} de {}".format(rodada, total_tentativas))
+    print(f"{AMARELO}Tentativa {rodada} de {total_tentativas}{RESET}")
+    
+    chute_str = input(f"{AZUL}Digite o seu número: {RESET}")
+    
+    try:
+        chute = int(chute_str)
+    except ValueError:
+        print(f"{VERMELHO}Por favor, digite um número válido!{RESET}")
+        continue
 
-    chute_str = input("Digite o seu numero: ")
-    chute = int(chute_str)
-
-    if(chute < 1 or chute > 100):
-        print("O número deve ser entre 1 e 100")
+    if chute < 1 or chute > 100:
+        print(f"{AMARELO}O número deve ser entre 1 e 100{RESET}")
         continue
 
     acertou = chute == numero_secreto
     maior = chute > numero_secreto
     menor = chute < numero_secreto
 
-    if(acertou):
-        print("É isso meno você é foda! ")
+    if acertou:
+        print(f"{VERDE}É isso! Parabéns, você acertou!{RESET}")
         break
     else:
-        if(maior):
-            print("Diminuii")
-        elif(menor):
-            print("Aumenta o bagulho")
-        # rodada = rodada + 1  <- No 'for' do Python, isso não é necessário, mas mantive a lógica
+        if maior:
+            print(f"{VERMELHO}Diminuir... tente um número menor.{RESET}")
+        elif menor:
+            print(f"{VERMELHO}Aumentar... tente um número maior.{RESET}")
 
-print(f"O número era: {numero_secreto}")
-print("Boa meno tenta de novo se tu é bem home")
+
+if not acertou:
+    print(f"\n{AZUL}O número secreto era: {numero_secreto}{RESET}")
+    print(f"{AZUL}Boa, tenta de novo se você quiser!{RESET}")
